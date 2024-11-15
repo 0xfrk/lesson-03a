@@ -59,31 +59,13 @@ const handleRequest = frames(async (ctx) => {
     await Promise.all([fetchUserData(fid)]);
   }
 
-  // プロフィール画像が取得できた場合に呼び出すコンポーネント
-  const ImageAvailable = () => {
-    return (
-      <div
-        tw="flex w-full h-full pt-40 justify-center items-center"
-        style={{
-          backgroundImage: `url(${appURL()}/bird.png)`,
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <img tw="rounded-full" src={userData?.profileImageUrl} width="600" height="600" alt="" />
-      </div>
-    );
-  };
+  // 変数 profileImageUrl を定義
+  const profileImageUrl = userData ? (userData as UserData).profileImageUrl : `${appURL()}/unavailable.png`;
 
-  // プロフィール画像が取得できなかった場合に呼び出すコンポーネント
-  const ImageUnavailable = () => {
-    return <img src={`${appURL()}/unavailable.png`} width="1146" height="1146" alt="" />;
-  };
-
-  // フレームデータを返す
   return {
-    image: fid && !error ? <ImageAvailable /> : <ImageUnavailable />,
+    image: profileImageUrl,
     imageOptions: {
-      aspectRatio: "1:1",
+      aspectRatio: "1:1", // 画像のアスペクト比を1:1に設定
     },
     buttons: [
       <Button action="post" target="/">
