@@ -9,7 +9,7 @@ const handleRequest = frames(async (ctx) => {
       aspectRatio: "1:1",
     },
     buttons: [
-      <Button action="post" key="reveal" target="/reveal">
+      <Button action="post" target="/reveal">
         Reveal
       </Button>,
     ],

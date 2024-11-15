@@ -79,21 +79,17 @@ const handleRequest = frames(async (ctx) => {
     return <img src={`${appURL()}/unavailable.png`} width="1146" height="1146" alt="" />;
   };
 
-  // ボタンコンポーネント
-  const buttons = [];
-  buttons.push(
-    <Button action="post" target="/">
-      Reset
-    </Button>
-  );
-
   // フレームデータを返す
   return {
     image: fid && !error ? <ImageAvailable /> : <ImageUnavailable />,
     imageOptions: {
       aspectRatio: "1:1",
     },
-    buttons: buttons,
+    buttons: [
+      <Button action="post" target="/">
+        Reset
+      </Button>,
+    ],
   };
 });
 
